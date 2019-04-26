@@ -31,16 +31,16 @@ public class LoginController {
         //Pegar usuario da tela
         String usuario =  view.getjTextFieldUsuario().getText();
         String senha = view.getjPasswordFieldSenha().getText();
-        Usuario usuarioNovo = new Usuario(usuario, senha);
+        Usuario usuarioAutenticar = new Usuario(usuario, senha);
         
         //Ver se existe no banco de dados
         Connection conexao = new Conexao().getConnection();
         UsuarioDAO usuarioDao = new UsuarioDAO(conexao);
         
-         boolean existeUsuario  =  usuarioDao.existeNoBancoPorUsuarioESenha(usuarioNovo);
+         boolean existe  =  usuarioDao.existeNoBancoPorUsuarioESenha(usuarioAutenticar);
         //Se existir no banco de dados passa para o menu
          
-         if(existeUsuario){
+         if(existe){
             MenuView telaDeMenu = new MenuView();
             telaDeMenu.setVisible(true);
          }
