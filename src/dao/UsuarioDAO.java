@@ -7,6 +7,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +32,20 @@ public class UsuarioDAO {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.execute();        
             connection.close();        
+    }
+
+    public boolean existeNoBancoPorUsuarioESenha(Usuario usuarioNovo) throws SQLException {
+       String sql = "select * from usuario where usuario = '"+usuarioNovo.getUsuario()+"' and senha = '"+usuarioNovo.getSenha()+"'";
+       PreparedStatement statement = connection.prepareStatement(sql);
+       
+       boolean resultado = statement.execute();	
+       ResultSet resultSet = statement.getResultSet();
+       
+       while(resultSet.next()) {
+	   return true;
+       }
+       
+       return false;
     }
     
     
