@@ -30,8 +30,7 @@ public class UsuarioDAO {
             String sql = "insert into usuario(usuario,senha) values('"+usuario.getUsuario()+"','"+usuario.getSenha()+"'); ";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.execute();        
-            connection.close();
-            
+            connection.close();        
     }
     
     

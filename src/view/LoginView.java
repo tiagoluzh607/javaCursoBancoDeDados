@@ -5,17 +5,21 @@
  */
 package view;
 
+import controller.LoginController;
+
 /**
  *
  * @author tiago
  */
 public class LoginView extends javax.swing.JFrame {
+    private final LoginController controller;
 
     /**
      * Creates new form LoginView
      */
     public LoginView() {
         initComponents();
+        controller = new LoginController(this);
     }
 
     /**
@@ -73,8 +77,7 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        MenuView telaDeMenu = new MenuView();
-        telaDeMenu.setVisible(true);
+        controller.autenticar();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
