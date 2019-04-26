@@ -35,8 +35,11 @@ public class UsuarioDAO {
     }
 
     public boolean existeNoBancoPorUsuarioESenha(Usuario usuarioNovo) throws SQLException {
-       String sql = "select * from usuario where usuario = '"+usuarioNovo.getUsuario()+"' and senha = '"+usuarioNovo.getSenha()+"'";
+       String sql = "select * from usuario where usuario = ? and senha = ?";
        PreparedStatement statement = connection.prepareStatement(sql);
+       
+       statement.setString(1, usuarioNovo.getUsuario());
+       statement.setString(2, usuarioNovo.getSenha());
        
        boolean resultado = statement.execute();	
        ResultSet resultSet = statement.getResultSet();
