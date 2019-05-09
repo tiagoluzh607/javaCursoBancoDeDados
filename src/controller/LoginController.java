@@ -37,6 +37,7 @@ public class LoginController {
         Connection conexao = new Conexao().getConnection();
         UsuarioDAO usuarioDao = new UsuarioDAO(conexao);
         
+        
          boolean existe  =  usuarioDao.existeNoBancoPorUsuarioESenha(usuarioAutenticar);
         //Se existir no banco de dados passa para o menu
          
