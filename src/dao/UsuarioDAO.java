@@ -28,7 +28,7 @@ public class UsuarioDAO {
         this.connection = connection;
     }
     
-    public int insert(Usuario usuario) throws SQLException{
+    public Usuario insert(Usuario usuario) throws SQLException{
    
             String sql = "insert into usuario(usuario,senha) values(?,?)";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -42,7 +42,9 @@ public class UsuarioDAO {
             
             resultSet.next();
             int id = resultSet.getInt("id");
-            return id;
+            usuario.setId(id);
+            
+            return usuario;
     }
     
     public void update(Usuario usuario) throws SQLException{
@@ -68,10 +70,12 @@ public class UsuarioDAO {
     
     public void delete(Usuario usuario) throws SQLException{
         
-        String sql = "select * from usuario where id = ?";
+        String sql = "delete from usuario where id = ?";
         
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, usuario.getId());
+        
+        statement.execute();
     }
     
     public ArrayList<Usuario> selectAll() throws SQLException{
@@ -82,13 +86,13 @@ public class UsuarioDAO {
         return pesquisa(statement);
     }
     
-    public ArrayList<Usuario> selectPorId(Usuario usuario) throws SQLException{
+    public Usuario selectPorId(Usuario usuario) throws SQLException{
         
         String sql = "select * from usuario where id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, usuario.getId());
         
-        return pesquisa(statement);
+        return pesquisa(statement).get(0);
     }
     
     private ArrayList<Usuario> pesquisa(PreparedStatement statement) throws SQLException {
